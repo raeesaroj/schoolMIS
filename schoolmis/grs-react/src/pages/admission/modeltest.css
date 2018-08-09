@@ -1,0 +1,36 @@
+.modeltest-main {
+  width: 90%;
+  margin: auto;
+}
+
+.modeltest-head {
+  text-align: center;
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+  padding-top: 30px;
+}
+
+.modeltest-des {
+  color: #111;
+  font-size: 18px;
+  text-align: center;
+}
+
+.modeltest-download {
+  border: 2px solid #00bcd4;
+  background-color: #fff;
+  color: #111;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14);
+  padding: 12px 20px;
+  line-height: 1.428571;
+  text-transform: uppercase;
+  transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1);
+  will-change: box-shadow, transform;
+}
+
+.modeltest-download:hover {
+  color: #fff !important;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 12px -5px rgba(0, 188, 212, .46);
+}

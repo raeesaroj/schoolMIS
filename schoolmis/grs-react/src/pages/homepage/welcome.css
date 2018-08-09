@@ -1,0 +1,106 @@
+.welcome-main {
+  padding-bottom: 30px;
+}
+
+.principal-pic {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 300px;
+}
+
+.principal-pic > img {
+  object-fit: cover;
+  max-height: 250px;
+  max-width: 250px;
+  min-width: 250px;
+  min-height: 250px;
+  border-radius: 50%;
+  transition: all .5s ease;
+}
+
+.principal-pic > img:hover {
+  transform: scale(1.05);
+}
+
+.welcome-head-1 {
+  padding: 50px 0 0 12%;
+  margin-bottom: 0;
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+}
+
+.welcome-head-2 {
+  padding: 0 0 50px 12%;
+  margin-bottom: 0;
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+  top: 50px;
+}
+
+@media screen and (max-width: 576px) {
+  .welcome-head-1 {
+    padding-top: 10px;
+  }
+}
+
+.welcome-orange {
+  color: orange;
+  font-size: 18px;
+  font-weight: 400;
+  width: 85%;
+  margin: auto;
+  text-align: justify;
+}
+
+.welcome-p {
+  color: #000;
+  font-size: 16px;
+  width: 85%;
+  margin: auto;
+  text-align: justify;
+}
+
+@media screen and (max-width: 786px) {
+  .welcome-orange {
+    font-size: 16px;
+  }
+
+  .welcome-p {
+    font-size: 14px;
+  }
+}
+
+.see-more {
+  color: #fff;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14);
+  left: 7.5%;
+}
+
+.see-more:hover, .see-more:active, .see-more:focus{
+  color: #fff;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 12px -5px rgba(0, 188, 212, .46);
+}
+
+.btn:active:hover, .btn:active:focus, .btn:active.focus, .btn.active:hover, .btn.active:focus, .btn.active.focus, .open>.btn.dropdown-toggle:hover, .open>.btn.dropdown-toggle:focus, .open>.btn.dropdown-toggle.focus, .show>.btn.dropdown-toggle:hover, .show>.btn.dropdown-toggle:focus, .show>.btn.dropdown-toggle.focus, .btn.btn-default:active:hover, .btn.btn-default:active:focus, .btn.btn-default:active.focus, .btn.btn-default.active:hover, .btn.btn-default.active:focus, .btn.btn-default.active.focus, .open>.btn.btn-default.dropdown-toggle:hover, .open>.btn.btn-default.dropdown-toggle:focus, .open>.btn.btn-default.dropdown-toggle.focus, .show>.btn.btn-default.dropdown-toggle:hover, .show>.btn.btn-default.dropdown-toggle:focus, .show>.btn.btn-default.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+}
+
+.swal2-popup .swal2-image {
+  object-fit: cover;
+  max-width: 150px;
+  min-width: 150px;
+}
+
+.message-principal .swal2-image {
+  border-radius: 50%;
+}

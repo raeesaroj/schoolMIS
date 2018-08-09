@@ -1,0 +1,68 @@
+ {% load staticfiles %}
+{% load filter_groups %}
+ <div class="main-panel">
+
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        {% if request.user|has_group:"Student" %}
+                            <p>You are login as Student</p>
+                        {% elif request.user|has_group:"Teacher" %}
+                            <p>You are login as Teacher <br>
+                            Class Teacher of
+                                {% with request.user.teacher_profile.class_teacher.all as class_teacher %}
+                                    {% for g in class_teacher %}
+                                     Grade {{g.grade}}, Section {{g.name}}
+                                    {% endfor %}
+                                {% endwith %}
+                            </p>
+                        {% elif request.user|has_group:"Guardian" %}
+                            <p>You are login as Guardian</p>
+                        {% elif request.user|has_group:"Principal" %}
+                            <p>You are login as Principal</p>
+                        {% elif request.user|has_group:"Admin Assistant" %}
+                            <p>You are login as Admin Assistant</p>
+                            <p class="navbar-brand" >Welcome {{request.user}}</p>
+                        {% else %}
+                            <p>You are login as Super Admin</p>
+
+                        {% endif %}
+
+                        
+
+                        <p class="navbar-brand" >
+                            {% if request.user|has_group:"Student" %}
+                                 Grade
+                                 {{request.user.student_profile.grade}}
+                                 &nbsp;&nbsp;
+                Class-Teacher:
+                            {% with request.user.student_profile.grade.section_set.all as section %}
+                                {% for teacher in section %}
+                                    {{teacher.class_teacher}}
+                                {% endfor %}
+                            {% endwith %}
+                            {% endif %}
+                        </p>
+      
+<!--  {% if request.user|has_group:"Student" %}
+                                 
+                                 {% for grade in grade  %}
+                                 <a href="{% url 'school:grade_detail' grade.slug %}"  class="marksheet"><button type="button" class="btn btn-info">Grade:{{grade}} </button></a>
+
+                                 {% endfor %}&nbsp;&nbsp;
+                                <button type="button" class="btn btn-info">Class-Teacher:{{request.user.student_profile.section.class_teacher}}</button>
+                            {% endif %}
+                            <button type="button" class="btn btn-info">Welcome {{request.user}}</button> -->
+
+
+                    </div>
+                </div>
+            </nav>
+ 

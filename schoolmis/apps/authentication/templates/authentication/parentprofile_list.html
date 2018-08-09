@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-md-12">
+                            <div class="card card-plain">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">User Profile</h4>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    {% for parent in parent|dictsort:"get_full_name" %}
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">First name:</label>
+                                                <input type="text" name="first_name" value="{{parent.first_name}}" id="id_first_name" maxlength="250" required="" class="form-control" disabled="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label for="id_last_name" class="control-label">Last name:</label>
+                                                <input type="text" name="last_name"  maxlength="250" value="{{parent.last_name}}" id="id_last_name"  class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label for="id_gender" class="control-label">Gender:</label>
+                                                <input type="text" name="gender"  maxlength="250" value="{{parent.gender}}" id="id_gender"  class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Email:</label>
+                                                <input type="text"  value="{{parent.email}}" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Nationality:</label>
+                                                <input type="text"  value="{{parent.nationality}}"   class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Occupation:</label>
+                                                <input type="text"  value="{{parent.occupation}}"   class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Temporary Address:</label>
+                                                <input type="text"  value="{{parent.temporary_address}}"   class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Permanent Address:</label>
+                                                <input type="text"  value="{{parent.permanent_address}}" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label  class="control-label">Phone:</label>
+                                                <input type="text"  value="{{parent.phone}}"   class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'authentication:parent_update' parent.slug %}"><button type="submit" class="btn btn-primary pull-right">Update Profile</button></a>
+                                    <div class="clearfix"></div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+            
+	                	         
+	                 
+
+
+

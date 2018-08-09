@@ -1,0 +1,45 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Notice Lists</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                {% if notices %}
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+				{% for notice in notices %}
+
+                <tr>
+                	<td>{{ forloop.counter }}</td>
+	                <td><a href="{% url 'home:notice_detail' notice.pk%}"  class="marksheet">{{notice.title}}</a></td>
+	                {% if perms.home.change_notice %}
+	                 
+	                <td><a href="{% url 'home:notice_update' notice.pk%}" class="marksheets" title="Edit"><i class="fa fa-edit " aria-hidden="true"></i></a>
+					</td>
+					{% endif %}
+					{% if perms.home.delete_notice %}
+	                <td><a href="{% url 'home:notice_delete' notice.pk%}" class="marksheets" title="Delete"><i class="fa fa-trash-o " aria-hidden="true"></i></a></td>	         
+	                 {% endif %}
+
+					
+            	</tr>
+            	{% empty %}
+					Sorry, no Notice
+					{% endfor %}
+            	  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+

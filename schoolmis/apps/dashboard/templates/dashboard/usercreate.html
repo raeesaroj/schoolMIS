@@ -1,0 +1,63 @@
+{% load filter_groups %}
+{% if request.user|has_group:"Admin Assistant" or request.user|has_group:"Principal" %}
+<div class="active tab-pane" id="usercreate">
+<div class="row">
+<div class="col-sm-4">
+<a href="{% url 'authentication:student_create' %}"><button class="btn btn-info">Create Student Profile</button></a>
+    <br>Total Students : {{students.count}}
+
+</div>
+<div class="col-sm-4">
+<a href="{% url 'authentication:teacher_create' %}"><button class="btn btn-info">Create Teacher Profile</button></a>
+
+</div>
+<div class="col-sm-4">
+<a href="{% url 'authentication:parent_create' %}"><button class="btn btn-info">Create Parent Profile</button></a>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12">
+        <div class="panel border-left-xlg border-left-info invoice-grid timeline-content" data-background-color="purple">
+        <div class="panel-footer">
+            <ul>
+                
+                    <h4 class="subject">Teacher List</h4> Total Teachers: {{teacher.count}}
+                <a href = "{% url 'authentication:export-teacher' %}" title="Export to excel"> <i class="fa fa-download fa-2x" aria-hidden="true" style="float: right; color:purple;margin-top: -32px;"></i></a>
+               
+            </ul>
+        </div>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-sm-12">
+             <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            {% if teacher %}
+                            <thead>
+                                <th>ID</th>
+                                <th>First Name </th>
+                                <th>last Name </th>
+                                <th>Qualification</th>
+                            </thead>
+                            {% endif %}
+                            {% for teacher in teacher %}
+                            <tr>                            
+                                <td>{{ forloop.counter }}</td>
+                            <td><a href="{% url 'authentication:teacher_update' teacher.slug %}" class="marksheet">{{teacher.first_name}} </a></td>
+                            <td> <a href="{% url 'authentication:teacher_update' teacher.slug %}" class="marksheet">{{teacher.last_name}} </a></td>
+                            <td>  {{teacher.education}}</td> 
+                            {% empty %}
+                            Sorry No teacher found
+                            </tr>
+                            {% endfor %} 
+                                  </table>
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+ 

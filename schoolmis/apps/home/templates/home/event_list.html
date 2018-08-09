@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Event Lists</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                {% if events %}
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+				{% for event in events %}
+                <tr>
+                	<td>{{ forloop.counter }}</td>
+	                <td><a href="{% url 'home:event_detail' event.pk%}"  class="marksheet">{{event.title}}</a></td>
+	                {% if perms.home.change_event %}
+	                 
+	                <td><a href="{% url 'home:event_update' event.pk%}" class="marksheets" title="Edit"><i class="fa fa-edit " aria-hidden="true"></i></a>
+					</td>
+					{% endif %}
+					{% if perms.home.delete_event %}
+	                <td><a href="{% url 'home:event_delete' event.pk%}" class="marksheets"><i class="fa fa-trash-o " aria-hidden="true" title="Delete"></i></a></td>	         
+	                 {% endif %}
+
+					
+            	</tr>
+            	{% empty %}
+					Sorry, no Events
+					{% endfor %}
+            	  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+
+
+

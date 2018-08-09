@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Subject Handled</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Subject Code</th>
+                    <th>Grade</th>
+                </thead>
+				{% for subject in subjects %}
+                <tr>
+	                <td>{{ forloop.counter }}</td>
+	                <td>{{subject.name}}</td>
+	                <td>{{subject.code}}</td>	                 
+	                <td>{{subject.grade}}</td>	         
+	                 {% empty %}
+				    {% include 'reportcard/404.html' %}
+				{% endfor %}
+            	</tr>
+            	  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+

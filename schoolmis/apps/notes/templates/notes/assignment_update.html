@@ -1,0 +1,142 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+                <{% include 'dashboard/sidebar/notes_and_assignments_sidebar.html' %}
+            </div>
+        </div>{% include 'dashboard/navbar.html' %}
+            <div class="content">           
+<div class="active tab-pane" id="notes">
+ <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">Edit Assignment</h4>
+                                </div>
+                                <div class="card-content">
+                                    {% include 'form_error.html' %}
+                                   <form action="" method="post" id ="assignment_form" data-form-url="{% url 'note_assignment:ajax_load_students_subjects' %}"
+                                        enctype='multipart/form-data'>
+                                    {% csrf_token %}
+                                    <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label for="id_title"  class="control-label">Title:</label>
+                                        <input type="text" name="title" required="" maxlength="250" id="id_title" class="form-control" value="{{ form.title.value }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_description" class="control-label">Description:</label>
+                                            <input type="textarea" name="description" required="" cols="40" rows="5" id="id_description" class="form-control" value="{{form.description.value}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label for="id_grade" class="control-label">Grade</label>
+                                        {{ form.grade }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label for="id_subject" class="control-label">Subject</label>
+                                        {{ form.subject }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label for="id_student" class="control-label">Student</label>
+                                        {{ form.student }}
+                                    </div>
+                                </div>
+                            </div>
+                            <style type="text/css">
+                                a{
+                                    color: blue;
+                                }
+                            </style>
+                                    <div class="col-md-12">
+                                    <div class="form-group label-floating">
+                                        <label for="id_files" class="control-label">Files:</label>
+                                    </div>
+                                    {{ form.files }}
+                                <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group label-floating">
+                                        <label for="id_submit_date" class="control-label">Submit Date</label>
+                                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="submit_date" value=" {{form.submit_date.value|date:'n/d/Y'}}" id="id_submit_date"  class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating">
+                                        <label for="id_status" class="control-label">Status</label>
+                                        <input type="checkbox" name="status" id="id_status" value="{{ form.status.value }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                                    <!-- <input type="submit"> -->
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_grade").change(function () {
+      var url = $("#assignment_form").attr("data-form-url");
+      var grade = $(this).val();
+      $.ajax({
+        url: url,
+        data: {
+          'grade': grade
+        },
+        success: function (data) {
+         $("#id_student").html(data.students);
+         $("#id_subject").html(data.subjects);
+        }
+
+      });
+
+    });
+  </script>
+</div>
+            </div>
+            </body>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>

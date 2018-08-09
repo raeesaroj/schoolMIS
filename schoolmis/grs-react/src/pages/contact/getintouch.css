@@ -1,0 +1,56 @@
+.getintouch-main {
+  width: 90%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.getintouch-input {
+  width: 80% !important;
+}
+
+.getintouch-input .active {
+  color: #4caf50;
+}
+
+.getintouch-head {
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+}
+
+.getintouch-subhead {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.getintouch-p {
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.getintouch-p > a {
+  color: #4caf50;
+}
+
+.getintouch-p > a:hover {
+  color: #00bcd4;
+}
+
+.contact-us-btn {
+  color: #fff;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14);
+}
+
+.contact-us-btn:hover, .contact-us-btn:active, .contact-us-btn:focus{
+  color: #fff;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 12px -5px rgba(0, 188, 212, .46);
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #00bcd4;
+  box-shadow: 0 1px 0 0 #00bcd4;
+}

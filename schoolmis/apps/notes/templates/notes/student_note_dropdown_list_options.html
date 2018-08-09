@@ -1,0 +1,35 @@
+<!--Table-->
+<table class="table table-bordered table-responsive-md">
+    <!--Table head-->
+    <thead>
+        <tr>
+            <th class="pr-md-3 pr-5">
+            Status
+            </th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Roll No.</th>
+
+        </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+        <tr>            
+        	{% for student in students|dictsortreversed:"roll_no" %}
+            <th scope="row" class="pr-md-3 pr-5">
+                <input type="checkbox" class="filled-in" id="checkbox124" name="student" checked value="{{student.pk}}" id="{{student.pk}}" data-bind="checked: params.availToStream">
+                <label for="checkbox124" class="label-table"></label>
+            </th>
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{student.roll_no}}</td>
+
+        </tr>
+                {% endfor %}
+
+    </tbody>
+    <!--Table body-->
+
+</table>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%  for exam_type in exam_type %}
+{{forloop.counter}}. {{exam_type}}
+    <a href="{% url 'school:exam_type_update' exam_type.pk%}">Edit </a>
+    <a href="{% url 'school:exam_type_delete' exam_type.pk%}">Delete </a>
+<br>
+{% endfor %}
+    <a href="url 'school:exam_type_create' %}' ">Create Exam Type </a>
+</body>
+</html>

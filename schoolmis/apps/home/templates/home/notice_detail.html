@@ -1,0 +1,74 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+                {% include 'dashboard/sidebar/events_sidebar.html' %}
+            </div>
+        </div>{% include 'dashboard/navbar.html' %}
+            <div class="content">           
+<div class="active tab-pane" id="events">
+	<div class="row">
+             <div class="col-md-12">
+                 <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Notices</h4>
+                    </div>
+                    <style type="text/css">
+                    	p{
+                    		margin-top: 10px;
+                    	}
+                    </style>
+                    <div class="card-content table-responsive">    
+						<b>Title:</b><p>{{ notices.title}}</p><hr>
+						<b>Date:</b><p>{{notices.date}}</p><hr>
+						<b>Details:</b><p>{{notices.text}}</p><hr>
+						
+                        </div>
+                        {% if perms.home.change_notice %}
+                        <a href="{% url 'home:notice_update' notices.pk%}" class="marksheets" title="Edit"><button class="btn btn-primary pull-right">Edit</button>
+                            {% endif %}
+
+                    </a>
+                    </div>
+                </div>
+                  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+
+
+</div>
+</div>
+</body>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>
+
+
+

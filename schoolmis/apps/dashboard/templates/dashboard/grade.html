@@ -1,0 +1,28 @@
+{% load filter_groups %}
+{% if request.user|has_group:"Admin Assistant" or request.user|has_group:"Student" or request.user|has_group:"Teacher" or request.user|has_group:"Principal" %}
+ <div class="tab-pane" id="grade">
+                  <div class="row">
+                    {% if perms.school.add_grade %}
+                    <div class="col-xs-4">
+                    <a href="{% url 'school:grade_create' %}"><button class="btn btn-info">Add Grade</button></a>
+                    </div>
+                      {% endif %}
+                      {% if perms.school.view_grade %}
+                      <div class="col-md-6">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        {% include 'school/grade_list.html' %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+                      {% endif %}
+                        </div>
+                        
+
+            </div>
+            {% endif %}

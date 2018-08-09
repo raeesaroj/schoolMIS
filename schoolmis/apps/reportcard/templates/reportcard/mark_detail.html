@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Grade: {{ mark.grade }}<br>
+Exam Type: {{ mark.exam_type }}<br>
+{{ mark.subject }}<br>
+Full marks: {{ mark.full_marks }}<br>
+Pass Marks: {{ mark.pass_marks }}<br>
+
+
+<b>Marks Obtained</b><br>
+{% for mark in mark.studentmarks_mark.all %}
+{{ forloop.counter }}. {{ mark.student }}::{{ mark.marks_obtained }} <br>
+{% endfor %}
+
+</body>
+</html>

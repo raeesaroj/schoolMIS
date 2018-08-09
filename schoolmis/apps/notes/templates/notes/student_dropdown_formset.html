@@ -1,0 +1,46 @@
+{% include 'form_error.html' %}
+<h3>Add student Marks</h3>
+<table class="table">
+<input type="hidden" name="studentmarks_mark-TOTAL_FORMS" value="{{ students.count }}" id="id_studentmarks_mark-TOTAL_FORMS">
+<input type="hidden" name="studentmarks_mark-INITIAL_FORMS" value="0" id="id_studentmarks_mark-INITIAL_FORMS">
+<input type="hidden" name="studentmarks_mark-MIN_NUM_FORMS" value="0" id="id_studentmarks_mark-MIN_NUM_FORMS">
+<input type="hidden" name="studentmarks_mark-MAX_NUM_FORMS" value="1000" id="id_studentmarks_mark-MAX_NUM_FORMS">
+<thead>
+                    <tr>
+                            <th>S.N</th>
+
+                            <th>Student</th>
+
+                            <th>Marks obtained</th>
+
+
+                    </tr>
+                    </thead>
+{% for student in students %}
+    <tbody>
+        <tr class="row1 student_marks_formset_row dynamic-form">
+           <p>
+               <td>{{ forloop.counter }}.</td>
+            <td>
+                <input type="hidden" name="studentmarks_mark-{{ forloop.counter0 }}-mark" id="id_studentmarks_mark-{{ forloop.counter0 }}-mark">
+                <input type="hidden" name="studentmarks_mark-{{ forloop.counter0 }}-id" id="id_studentmarks_mark-{{ forloop.counter0 }}-id">
+
+                <select name="studentmarks_mark-{{ forloop.counter0 }}-student" id="id_studentmarks_mark-{{ forloop.counter0 }}-student">
+
+                      <option value="{{ student.pk }}">{{ student.user }}</option>
+
+                </select>
+            </td>
+
+                <td>
+
+                    <input type="number" name="studentmarks_mark-{{ forloop.counter0 }}-marks_obtained" step="0.01" id="id_studentmarks_mark-{{ forloop.counter0 }}-marks_obtained">
+                </td>
+
+            </p>
+
+
+        </tr>
+    </tbody>
+{% endfor %}
+</table>

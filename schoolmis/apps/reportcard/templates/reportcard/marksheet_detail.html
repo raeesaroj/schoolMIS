@@ -1,0 +1,125 @@
+{% load staticfiles %}
+{% load mathfilters %}
+
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+                {% include 'dashboard/sidebar/marksheet_sidebar.html' %}
+            </div>
+        </div>{% include 'dashboard/navbar.html' %}
+        <div class="content"> 
+         <div class="active tab-pane" id="reportcard">
+     <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">Marksheet&nbsp;&nbsp;{{marksheet.student.user}}</h4>
+                                </div>
+                                <div class="card-content">
+                               <div>
+        <div style="text-align: center; margin-top: 20px">
+         <form action="{% url 'reportcard:marksheet_pdf' marksheet.pk %}" method="post">{% csrf_token %}
+         <input type="submit" value="Export as PDF" style="text-align: center">
+         </form>
+        </div>
+    <center>
+        <div>
+            <h3>created by : {{marksheet.created_by}}</h3>
+            Student Name: {{marksheet.student.user}}<br>
+            Grade: {{marksheet.grade.name }}<br>
+            Section: {{marksheet.student.section.name }}<br>
+            Exam Type : {{ marksheet.exam_type }}
+        </div>
+    </center>
+        <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">S.N</th>
+              <th scope="col" rowspan="2">Subject</th>
+              <th scope="col" rowspan="2">Full</th>
+              <th scope="col" rowspan="2">Pass</th>
+              <th scope="col" colspan="2"><center>Obtained Marks</center></th>
+              <th scope="col" rowspan="2">Total</th>
+              <th scope="col" rowspan="2">Remarks</th>
+            </tr>
+            <tr>
+              <th scope="col">TH</th>
+              <th scope="col">PR</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+          <!--{% for marksheet in marksheet.exam_type.mark_exam_type.all  %}-->
+                <!--<td>{{ forloop.counter }}</td>-->
+                <!--<td> {{marksheet.subject.name}}</td>-->
+                <!--<td>{{marksheet.full_marks}}</td>-->
+                <!--<td> {{marksheet.pass_marks}}</td>-->
+                <!--<td>-->
+
+                 <!--{% for obt in marksheet.studentmarks_mark.all %}-->
+                  <!--{{obt.marks_obtained}}-->
+                <!--{% endfor %}-->
+                <!--</td>-->
+              <!--<td>20</td>-->
+              <!--<td>Total: </td>-->
+              <!--<td>Pass</td>-->
+            <!--</tr>-->
+          <!--{% endfor %}-->
+            {% for m in marksheet.student.marks_student.all %}
+                <td>{{ forloop.counter }}</td>
+                <td>{{m.mark.subject.name}}</td>
+                <td>{{m.mark.full_marks}}</td>
+                <td>{{m.mark.pass_marks}}</td>
+                <td>{{m.marks_obtained}}</td>
+
+            {% endfor %}
+
+              <td>20</td>
+              <td>Total: </td>
+              <td>Pass</td>
+            </tr>
+          </tbody>
+        </table><br>
+            <!--<b>Issue by</b> :{{marksheet.issue_by}}<br>-->
+            <!--<b>Total marks obtained </b>: {{marksheet.get_total_obtained_marks}}-->
+
+        </div>
+        </div>
+                    </div> 
+                     </div>
+                    </div>
+                    </div> 
+                    </div>
+                </div>
+            </div>          
+       
+<script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>
+
+
+
+

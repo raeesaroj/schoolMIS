@@ -1,0 +1,78 @@
+.methodology-main {
+  /* height: 100vh; */
+}
+
+.methodology-head {
+  text-align: center;
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+.methodology-des {
+  color: #111;
+  margin: auto;
+  width: 80%;
+  text-align: justify;
+}
+/*
+.card .card-content .card-title, .card .card-reveal .card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.card:hover {
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+
+.card .card-content .card-title:hover, .card .card-reveal .card-title:hover {
+  color: #00bcd4 !important;
+}
+
+.card .card-image img {
+  height: 160px;
+  object-fit: cover;
+}
+
+.card .card-content .card-title i {
+  display: none;
+} */
+
+.methodology-img {
+  height: 150px;
+  width: 150px;
+  padding-top: 30px;
+  object-fit: contain;
+  transition: all .6s ease;
+}
+
+.methodology-img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.method-p {
+  width: 80%;
+  text-align: justify;
+  transition: all .6s linear;
+}
+
+.method-head {
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+}
+
+.method-head:hover {
+  cursor: pointer;
+  color: #4caf50;
+}
+
+.hide-div {
+  display: none;
+  transition: all .6s linear;
+}
+
+.show-div {
+  display: block;
+  transition: all .6s linear;
+}

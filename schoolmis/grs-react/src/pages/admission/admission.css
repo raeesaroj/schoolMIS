@@ -1,0 +1,17 @@
+.admission-main {
+  padding-top: 100px;
+  background: url('../../assets/gray-dot.svg');
+}
+
+.admission-bg {
+  background: url('../../assets/admission.jpg') no-repeat center center;
+  height: 60vh;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media screen and (max-width: 992px) {
+  .admission-bg {
+    background-attachment: scroll;
+  }
+}

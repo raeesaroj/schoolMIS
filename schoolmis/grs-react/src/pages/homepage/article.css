@@ -1,0 +1,32 @@
+.article-date {
+  background-color: #00bcd4;
+  padding: 6px 0;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 1%;
+  text-align: center;
+  width: 60px;
+  float: left;
+}
+
+.article-des {
+  font-size: 18px;
+  margin-left: 2%;
+  color: green;
+}
+
+.article-content {
+  color: #111;
+  text-align: justify;
+  width: 80%;
+}
+
+.article-div {
+  height: 80px;
+}
+
+.article-head {
+  margin-left: 1%;
+}

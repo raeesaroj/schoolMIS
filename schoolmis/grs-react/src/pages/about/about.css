@@ -1,0 +1,20 @@
+.about-main {
+  padding-top: 100px;
+}
+
+.about-bg {
+  background: url('../../assets/1.JPG') no-repeat center center;
+  height: 60vh;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media screen and (max-width: 992px) {
+  .about-bg {
+    background-attachment: scroll;
+  }
+}
+
+.parallax-container {
+  height: 40vh;
+}

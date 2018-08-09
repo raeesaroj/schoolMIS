@@ -1,0 +1,250 @@
+{% load staticfiles %}
+<!--
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                               
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">User Profile</h4>
+        </div>
+        <div class="card-content table-responsive">
+{% for student in students|dictsort:"get_full_name" %}
+              <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label for="id_first_name" class="control-label">First name:</label>
+						<input type="text" name="first_name" value="{{student.first_name}}" id="id_first_name" maxlength="250" required="" class="form-control" disabled="">
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_last_name" class="control-label">Last name:</label>
+                    <input type="text" name="last_name"  maxlength="250" value="{{student.last_name}}" id="id_last_name"  class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_gender" class="control-label">Gender:</label>
+                    <input type="text" name="gender"  maxlength="250" value="{{student.gender}}" id="id_gender"  class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Email:</label>
+						<input type="text"  value="{{student.email}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Grade:</label>
+                    <input type="text"  value="{{student.grade}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Roll No:</label>
+                    <input type="text"  value="{{student.roll_no|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Parent:</label>
+						<input type="text"  value="{{student.parent}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+               
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Temporary Address:</label>
+                    <input type="text"  value="{{student.temporary_address}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Permanent Address:</label>
+						<input type="text"  value="{{student.permanent_address}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Phone:</label>
+                    <input type="text"  value="{{student.phone}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Batch:</label>
+                    <input type="text"  value="{{student.batch|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Nationality:</label>
+                    <input type="text"  value="{{student.nationality}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+				<a href="{% url 'authentication:student_update' student.slug %}"><button type="submit" class="btn btn-primary pull-right">Update Profile</button></a>
+            <div class="clearfix"></div>
+            {% endfor %}
+            
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div> -->
+<style type="text/css">
+    .card-avatar{
+ width: 400px;
+ height: 400px;
+ background-size: cover;
+ display: block;
+ border-radius: 200px;
+ -webkit-border-radius: 100px;
+ -moz-border-radius: 100px;
+}
+</style>
+<div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-profile" style="margin-top:70px;">
+                                <div class="card-avatar" >
+
+                                    {% if studentprofile.file %}
+                                        <a href="#pablo">
+                                            <img class="img" src="{{request.user.student_profile.file.url}}" />
+                                        </a>
+                                    {% else %}
+                                     <a href="#pablo">
+                                         <img src="{% static 'images/default-user.png' %}" class="img-thumbnail"/>
+                                     </a>
+                                    {% endif %}
+                                </div>
+                                <div class="content" >
+                                    <h6 class="category text-gray"> <h4 class="card-title">User Name:&nbsp;{{request.user}}</h4>
+                                    <p class="card-content">
+                                        <div class="row">
+                                            {% for student in students|dictsort:"get_full_name" %}
+                                            <style type="text/css">
+                                                .row{
+                                                    margin-left: 5px;
+                                                    margin-right: 5px;
+                                                }
+                                            </style>
+                                            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label for="id_first_name" class="control-label">First name:</label>
+                        <input type="text" name="first_name" value="{{student.first_name}}" id="id_first_name" maxlength="250" required="" class="form-control" disabled="">
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_last_name" class="control-label">Last name:</label>
+                    <input type="text" name="last_name"  maxlength="250" value="{{student.last_name}}" id="id_last_name"  class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_gender" class="control-label">Gender:</label>
+                    <input type="text" name="gender"  maxlength="250" value="{{student.gender}}" id="id_gender"  class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Email:</label>
+                        <input type="text"  value="{{student.email}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Grade:</label>
+                    <input type="text"  value="{{student.grade}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Roll No:</label>
+                    <input type="text"  value="{{student.roll_no|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Parent:</label>
+                        <input type="text"  value="{{student.parent}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+               
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Temporary Address:</label>
+                    <input type="text"  value="{{student.temporary_address}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Permanent Address:</label>
+                        <input type="text"  value="{{student.permanent_address}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Phone:</label>
+                    <input type="text"  value="{{student.phone}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Batch:</label>
+                    <input type="text"  value="{{student.batch|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Nationality:</label>
+                    <input type="text"  value="{{student.nationality}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+                <a href="{% url 'authentication:student_update' student.slug %}"><button type="submit" class="btn btn-primary pull-right">Update Profile</button></a>
+            <div class="clearfix"></div>
+            {% endfor %}
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div></div></div></div>

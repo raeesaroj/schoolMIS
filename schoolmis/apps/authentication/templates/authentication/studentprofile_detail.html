@@ -1,0 +1,190 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+                {% include 'dashboard/sidebar/user_profile_sidebar.html' %}
+            </div>
+        </div>{% include 'dashboard/navbar.html' %}
+            <div class="content">           
+<div class="active tab-pane" id="events">
+<div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-profile" style="margin-top:70px;">
+                                <div class="card-avatar" style="max-width: 210px;border-radius: 0px;">
+                                    <a href="#pablo">
+                                        <img class="img" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" />
+                                    </a>
+                                </div>
+                                <div class="content" >
+                                    
+                                    <p class="card-content">
+                                        <div class="row">
+                                            <style type="text/css">
+                                                .row{
+                                                    margin-left: 5px;
+                                                    margin-right: 5px;
+                                                }
+                                            </style>
+                                            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label for="id_first_name" class="control-label">First name:</label>
+                        <input type="text" name="first_name" value="{{students.first_name}}" id="id_first_name" maxlength="250" required="" class="form-control" disabled="">
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_last_name" class="control-label">Last name:</label>
+                    <input type="text" name="last_name"  maxlength="250" value="{{students.last_name}}" id="id_last_name"  class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_gender" class="control-label">Gender:</label>
+                    <input type="text" name="gender"  maxlength="250" value="{{students.gender}}" id="id_gender"  class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Email:</label>
+                        <input type="text"  value="{{students.email}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Grade:</label>
+                    <input type="text"  value="{{students.grade}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Roll No:</label>
+                    <input type="text"  value="{{students.roll_no|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Temporary Address:</label>
+                    <input type="text"  value="{{students.temporary_address}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Permanent Address:</label>
+                        <input type="text"  value="{{students.permanent_address}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Phone:</label>
+                    <input type="text"  value="{{students.phone}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Batch:</label>
+                    <input type="text"  value="{{student.batch|default_if_none:''}}"   class="form-control" disabled>
+                    </div>
+                </div> -->
+                
+            </div>
+            <div class="clearfix"></div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div></div></div></div>
+
+
+                </div>
+
+
+<div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Academic Details:{{students}}</h4>
+                    </div>
+
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              {% if request.user|has_group:'Admin Assistant' or request.user|has_group:'Guardian' %}
+                                <th>Reportcard</th>
+                                {% endif %}
+                                {% if request.user|has_group:'Guardian' %}
+                                <th>Subjects </th>
+                                <th>Notes</th>
+                                <th>Assignments</th>
+                                {% endif %}
+                            </thead>
+                            <tr>
+                             {% if request.user|has_group:'Admin Assistant' or request.user|has_group:'Guardian' %}
+                                <td>{% for marksheet in students.marksheet_student.all %}{{forloop.counter}}.&nbsp;<a href="{% url 'reportcard:marksheet_detail' marksheet.pk %}" class="marksheet">{{ marksheet }}</a><br> {% endfor %}</td>
+                                {% endif %}
+                                    {% if request.user|has_group:'Guardian' %}
+                                <td>{% for subject in students.grade.subject_grade.all%}
+                                  {{ forloop.counter }}.&nbsp;{{ subject.name }}<br>
+                                {% endfor %}</td>
+                               
+                                <td> {% for note in students.grade.note_grade.all %}
+                                {{ forloop.counter }}.&nbsp; <a href="{% url 'note_assignment:note_detail' note.pk %}" class="marksheet">{{ note }}</a><br>
+                                  {% endfor %}</td>
+                                 <td> {% for assignment in students.assignment_set.all %}
+                                {{ forloop.counter }}.&nbsp; <a href="{% url 'note_assignment:assignment_detail' assignment.pk %}" class="marksheet">{{ assignment.title|truncatechars:20 }}</a><br>
+                                {% endfor %}</td>
+                                  {% endif %}
+                                 
+                            </tr>
+                              </tbody>
+                                  </table>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                </div>
+                  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+            
+    </div>
+            </div>
+            </body>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>
+

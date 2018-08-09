@@ -1,0 +1,46 @@
+.procedure-main {
+  width: 80%;
+  margin: auto;
+}
+
+.procedure-head {
+  text-align: center;
+  color: #000;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+  padding-bottom: 30px;
+}
+
+.procedure-p {
+  color: #111;
+  text-align: justify;
+  padding: 10px;
+}
+
+.procedure-sub-head {
+  color: #fff;
+  background-color: #4caf50;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 10px;
+  transition: all .5s ease;
+}
+
+.procedure-section {
+  width: 99%;
+  margin: auto;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+  transition: all .5s ease;
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.procedure-section:hover {
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  background: #fff;
+}
+
+.procedure-section:hover .procedure-sub-head {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

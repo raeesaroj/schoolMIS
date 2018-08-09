@@ -1,0 +1,40 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Assignment List</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+            	{% if assignment %}
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+				{% for assignment in assignment %}
+                <tr>
+                	<td>{{ forloop.counter }}</td>
+	                <td><a href="{% url 'note_assignment:assignment_detail' assignment.pk %}" class="marksheet">{{assignment.title}}</a></td>
+	                <td>{{assignment.subject}}</td>
+	                <td>{{assignment.grade}}</td>
+                           <td> {% for student in assignment.student.all %}{{ forloop.counter }}.{{student}}<br>{% endfor %}</td> 
+	                   {% if perms.notes.change_assignment %}
+	                <td><a href="{% url 'note_assignment:assignment_update' assignment.pk %}" class="marksheets" title="Edit"><i class="fa fa-edit " aria-hidden="true"></i></a>
+					</td>
+	                <td><a href="{% url 'note_assignment:assignment_delete' assignment.pk %}" class="marksheets" title="Delete"><i class="fa fa-trash-o " aria-hidden="true"></i></a></td>	         
+	                 {% endif %}
+
+
+            	</tr>
+            	{% empty %}
+					Sorry, no Assignment
+					{% endfor %}
+            	  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>

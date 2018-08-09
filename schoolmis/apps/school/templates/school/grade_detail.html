@@ -1,0 +1,224 @@
+ {% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+              {% include 'dashboard/sidebar/grade_sidebar.html' %}
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        {% if request.user|has_group:"Student" %}
+                            <p>You are login as Student</p>
+                        {% elif request.user|has_group:"Teacher" %}
+                            <p>You are login as Teacher</p>
+                        {% elif request.user|has_group:"Guardian" %}
+                            <p>You are login as Guardian</p>
+                        {% else %}
+                            <p>You are login as Admin Assistant</p>
+
+                        {% endif %}
+                        <p class="navbar-brand" >Welcome {{request.user}}</p>
+                        <p class="navbar-brand" >
+                            {% if request.user|has_group:"Student" %}
+                                 Grade 
+                                 {{grade}} 
+                            {% endif %}
+                        </p>
+
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right"> 
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                   <i class="fa fa-bars" style="color: #9c27b0;"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'authentication:logout' %}">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group  is-empty">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <span class="material-input"></span>
+                            </div>
+                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">           
+            <div class="active tab-pane" id="notes">
+                <div class="row">
+             <div class="col-md-5">
+                 <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Grade: {{grade}}&nbsp;&nbsp;Section</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th>ID</th>
+                                <th>Section Name </th>
+                                <th>Class Teacher</th>
+                                <th></th>
+                            </thead>
+                            {% for section in grade.section_set.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{section.name}}</td>
+                                <td> {{section.class_teacher}} 
+                                 
+                            </tr>
+                            {% endfor %}
+                              </tbody>
+                                  </table>
+                        </div>
+                    </div>
+                </div>
+                  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                        <div class="col-md-7">
+                        <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Grade:{{grade}}&nbsp;&nbsp;Subjects</h4>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th>ID</th>
+                                <th>Subject Name</th>
+                                <th>Subject Code</th>
+                                <th>Subject Teacher</th>
+                                <th></th>
+                            </thead>
+                            {% for subject in grade.subject_grade.all %}
+
+                            <tr> 
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{subject.name}}</td>
+                                <td> {{subject.code}} </td>
+                                <td> {{subject.teacher}} </td>
+                                
+                            </tr>
+                            {% endfor %} 
+                              </tbody>
+                                  </table>
+                        </div>
+                    </div>
+                </div>
+                 </div>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+            </div>
+            {% if request.user|has_group:"Teacher" or request.user|has_group:"Admin Assistant" or request.user|has_group:"Principal" %}
+            <div class="row">
+             <div class="col-md-12">
+              <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Grade:{{grade}}&nbsp;&nbsp;Students-Total: {{ grade.student_grade.all.count }}</h4>
+                        <a href = "{% url 'authentication:export-student' grade.slug %}" title="Export to excel"><i class="fa fa-download fa-2x" aria-hidden="true" style="float: right; color:white; margin-top: -30px;left: 10px;"></i></a>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th>ID</th>
+                                <th>First Name </th>
+                                <th>last Name </th>
+                                <th>Student Roll No</th>
+                                <th>Student Phone No</th>
+                                <th>Parent Name</th>
+                                <th>Parent Email</th>
+                                <th>Parent Phone No</th>
+                            </thead>
+                            {% for student in grade.student_grade.all|dictsort:"get_full_name" %}
+                            <tr>                            
+                                <td>{{ forloop.counter }}</td>
+                                {% if request.user|has_group:"Admin Assistant" %}
+                                
+                                <td><a href="{% url 'authentication:student_update'  student.slug %}" class="marksheet">{{student.first_name}}</a></td>
+                                <td><a href="{% url 'authentication:student_update'  student.slug %}" class="marksheet"> {{student.last_name}}</a></td> 
+                            </a>
+                            {% else %}
+                            <td>{{student.first_name}}</td>
+                            <td> {{student.last_name}}</td>
+                            {% endif %}
+                            <td>  {{student.roll_no}}</td>
+                            <td> {{student.phone}}</td>
+
+                            <td>{{ student.parent }}</td>
+
+                            <td>  {{student.parent.email}}</td>
+                            <td> {{student.parent.phone}}</td>
+                            </tr>
+                            {% endfor %} 
+                                  </table>
+                        </div>
+                    </div>
+                </div>
+                  </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    {% endif %}
+        </div>
+                        </div>
+            </body>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>

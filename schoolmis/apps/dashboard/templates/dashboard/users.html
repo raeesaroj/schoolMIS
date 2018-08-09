@@ -1,0 +1,12 @@
+ {% load filter_groups %}
+<div class="tab-pane" id="user">
+ {% if request.user|has_group:"Teacher" %}
+  {% include 'authentication/teacherprofile_list.html' %}
+{% endif %}
+{% if request.user|has_group:"Student" %}
+  {% include 'authentication/studentprofile_list.html' %}
+{% endif %}
+{% if request.user|has_group:"Guardian" %}
+  {% include 'authentication/parentprofile_list.html' %}
+{% endif %}
+</div>

@@ -1,0 +1,57 @@
+{% load filter_groups %}
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+     {% if request.user|has_group:"Admin Assistant" or request.user|has_group:"Student" or request.user|has_group:"Teacher" or request.user|has_group:"Principal" %}
+
+            <h4 class="title">Grade Lists</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                {% if grade %}
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+
+                     {% for grade in grade %}
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        {% if perms.school.detail_grade %}
+                        <td><a href="{% url 'school:grade_detail' grade.slug %}"  class="marksheet">Grade:{{grade}}</a></td>
+                        {% endif %}
+                        {% if perms.school.change_grade %}
+
+                        <td><a href="{% url 'school:grade_update' grade.slug %}" class="marksheets" title="Edit"><i class="fa fa-edit " aria-hidden="true"></i></a>
+                            {% endif %}
+                        </td>
+                        {% if perms.school.delete_grade %}
+                        <td><a href="{% url 'school:grade_delete' grade.slug %}" class="marksheets" title="Delete"><i class="fa fa-trash-o " aria-hidden="true"></i></a></td>
+                         {% endif %}
+
+
+                    </tr>
+                    {% empty %}
+                        Sorry No grade
+                        {% endfor %}
+                {% endif %}
+     
+     </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,283 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+<link href="{% static 'css/cropper.min.css' %}" rel="stylesheet">
+
+
+<style>
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn {
+  background-color: white;
+  padding: 8px 20px;
+  font-size: 20px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+</style>
+
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+        <div class="logo">
+                    GRS
+            </a>
+            <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+        </div>
+        <div class="sidebar-wrapper">
+           {% include 'dashboard/sidebar/user_profile_sidebar.html' %}
+        </div>
+    </div>{% include 'dashboard/navbar.html' %}
+    <div class="content">
+        <div class="active tab-pane" id="user">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">Edit Profile</h4>
+                                </div>
+                                <div class="card-content">
+                                    <!--success message-->
+                                    {% if messages %}
+                                    <div class="alert alert-success msg" style="width:350px; display: table; margin:0 auto;">
+                                <ul class="messages">
+                                    <center>
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    </center>
+                                    {% endfor %}
+                                </ul>
+                                    </div>
+                             {% endif %}
+                                    <!--end success message-->
+                                    {% include 'form_error.html' %}
+
+                                    <form method="post" enctype='multipart/form-data' id="formUpload">{% csrf_token %}
+                                        <div class="col-md-4" id="picture">
+                                            <div class="card card-profile">
+                                                <div class="card-avatar" style="margin-top:-40px;">
+                                                    {% if parentprofile.file %}
+                                                        <a href="#pablo">
+                                                            <img src="{{form.file.value.url}}" class="img-thumbnail"/>
+                                                        </a>
+                                                    {% else %}
+                                                     <a href="#pablo">
+                                                            <img src="{% static 'images/default-user.png' %}" class="img-thumbnail"/>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="card-title">{{ request.user}}</h4>
+                                                    <div class="upload-btn-wrapper">
+                                                        <button class="upload-btn btn btn-primary">Upload</button>
+                                                        <input type="file" name="file" id="id_file"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_first_name" class="control-label">First name:</label>
+                                                    <input type="text" name="first_name" value="{{form.first_name.value}}" id="id_first_name" maxlength="250" required="" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_middle_name" class="control-label">Middle name:</label>
+                                                    <input type="text" name="middle_name"  maxlength="250" value="{{form.middle_name.value}}" id="id_middle_name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_last_name" class="control-label">Last name:</label>
+                                                    <input type="text" name="last_name"  maxlength="250" value="{{form.last_name.value}}" id="id_last_name"  class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_email" class="control-label">E-Mail:</label>
+                                                    <input type="text" name="email" id="id_email" maxlength="250" value="{{form.email.value}}"  class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_phone" class="control-label">Phone:</label>
+                                                    <input type="text" name="phone" id="id_phone" maxlength="250" value="{{form.phone.value}}"  class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_occupation" class="control-label">Occupation:</label>
+                                                    <input type="text" name="occupation" id="id_occupation" maxlength="250" value="{{form.occupation.value}}"  class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_blood_group" class="control-label">Blood Group:</label>
+                                                    <input type="text" name="blood_group" id="id_blood_group" maxlength="250" value="{{form.blood_group.value}}"  class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_temporary_address" class="control-label">Temporary Address:</label>
+                                                    <input type="text" name="temporary_address" id="id_temporary_address" maxlength="250" value="{{form.temporary_address.value}}"  class="form-control" placeholder="pradesh,Jilla,Nagarpalika/Gaupalika,Ward-no">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_temporary_address" class="control-label">Permanent Address:</label>
+                                                    <input type="text" name="permanent_address" id="id_permanent_address" maxlength="250" value="{{form.permanent_address.value}}"  class="form-control" placeholder="pradesh,Jilla,Nagarpalika/Gaupalika,Ward-no">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label for="id_dob" class="control-label">Date Of Birth:</label>
+                                                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="dob" value="{{form.dob.value|date:"n/d/Y"}}" id="id_dob"  class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="x" id="id_x" value="0">
+                                        <input type="hidden" name="y" id="id_y" value="0">
+                                        <input type="hidden" name="width" id="id_width" value="200">
+                                        <input type="hidden" name="height" id="id_height" value="200">
+                                        <input type="submit" class="btn btn-success pull-right"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal for cropping-->
+    <div class="modal fade" id="modalCrop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Crop the photo</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="image" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group pull-left" role="group">
+                        <button type="button" class="btn btn-default js-zoom-in">
+                            <span class="glyphicon glyphicon-zoom-in"></span>
+                        </button>
+                        <button type="button" class="btn btn-default js-zoom-out">
+                            <span class="glyphicon glyphicon-zoom-out"></span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-success js-crop-and-upload">Crop and upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script src="{% static 'js/cropper.min.js' %}"></script>
+
+
+<script>
+$(function () {
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+      $("#id_file").change(function () {
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData;
+      var canvasData;
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 1,
+          aspectRatio: 1/1,
+          minCropBoxWidth: 200,
+          minCropBoxHeight: 200,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+          }
+        });
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x").val(cropData["x"]);
+        $("#id_y").val(cropData["y"]);
+        $("#id_height").val(cropData["height"]);
+        $("#id_width").val(cropData["width"]);
+        $("#formUpload").submit();
+      });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // messages timeout for 10 sec
+        setTimeout(function() {
+            $('.msg').fadeOut('slow');
+        }, 5000); // <-- time in milliseconds, 1000 =  1 sec
+
+        // delete message
+        $('.del-msg').live('click',function(){
+            $('.del-msg').parent().attr('style', 'display:none;');
+        })
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+

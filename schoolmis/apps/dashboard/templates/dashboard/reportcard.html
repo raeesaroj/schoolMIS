@@ -1,0 +1,72 @@
+ {% load filter_groups %}
+<div class="tab-pane" id="reportcard">
+                {% if request.user|has_group:"Guardian" %}
+                {% include 'reportcard/marksheet_list.html' %}
+                {% endif %}
+                  <div class="row">
+                        {% if perms.reportcard.add_marksheet %}
+                        <div class="col-xs-4">
+                                <a href="{% url 'reportcard:marksheet_create' %}"><button class="btn btn-info">
+                                    Create Marksheet</button></a>
+                            {% endif %}
+                            {% if perms.reportcard.add_mark %}
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{% url 'reportcard:mark_create' %}"><button class="btn btn-info">
+                                    Add Mark</button></a>
+                            </div>
+                            {% endif %}
+                        </div><br>
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                               <div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Marksheet List</h4>
+
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                {% if marksheet %}
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Exam Type</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+                {% for marksheet in marksheet %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    {% if perms.reportcard.view_marksheet %}
+                    <td><a href="{% url 'reportcard:marksheet_detail' marksheet.pk %}" class="marksheet">{{marksheet.student}}
+                    </a></td>
+                    {% endif %}
+                    <td>{{marksheet.grade}}</td>
+                    <td>{{ marksheet.exam_type }}</td>
+                     {% if perms.reportcard.change_marksheet %}
+                    <td><a href="{% url 'reportcard:marksheet_update' marksheet.pk %}" class="marksheets" title="Edit"><i class="fa fa-edit " aria-hidden="true"></a</td>
+                    <td><a href="{% url 'reportcard:marksheet_delete' marksheet.pk %}" class="marksheets" title="Delete" ><i class="fa fa-trash-o" aria-hidden="true"></a></td>
+                     {% endif %}
+                     {% empty %}
+                        Sorry, no Marksheet found
+                    {% endfor %}
+                </tr>
+                  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>

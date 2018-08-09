@@ -1,0 +1,102 @@
+.carousel {
+  height: auto;
+}
+
+#carousel-img {
+    max-width: 200px;
+    max-height: 200px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: hidden;
+    width: 45%;
+    height: auto;
+    min-width: 220px;
+    min-height: 220px;
+    border: 3px solid #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    vertical-align: center;
+    margin-left: 33.33%;
+    object-fit: cover;
+}
+
+.carousel-control.right {
+  display: none;
+}
+
+.carousel-control.left {
+  display: none;
+}
+
+blockquote {
+  text-align: justify;
+}
+
+.carousel-row .col-md-8 > blockquote {
+  vertical-align: center;
+  width: 90%;
+  font-family: Georgia, serif;
+  font-style: italic;
+  margin: auto;
+  padding: 0.25em 40px;
+  line-height: 1.45;
+  position: relative;
+  color: #383838;
+  border-left: none;
+  text-justify: auto;
+}
+
+.carousel-row .col-md-8 > blockquote:before {
+  display: block;
+  content: "\201C";
+  font-size: 80px;
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  color: #7a7a7a;
+}
+
+.testimonial-head {
+  text-align: center;
+  padding-bottom: 40px;
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+}
+
+.carousel-indicators {
+  bottom: -20px !important;
+}
+
+.carousel-row{
+  height: fixed;
+}
+
+.carousel-cite {
+  margin-left: 10%;
+  color: #00bcd4;
+}
+
+@media only screen and (max-width : 768px) {
+  #carousel-img {
+    margin-left: 30%;
+  }
+}
+
+@media only screen and (max-width : 480px) {
+  #carousel-img {
+    margin-left: 20%;
+  }
+
+  .carousel-cite {
+    margin-left: 5%;
+  }
+}
+
+@media only screen and (max-width : 320px) {
+  #carousel-img {
+    margin-left: 18%;
+  }
+}

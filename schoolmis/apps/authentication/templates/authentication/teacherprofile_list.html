@@ -1,0 +1,105 @@
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                               
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">User Profile</h4>
+        </div>
+        <div class="card-content table-responsive">
+            {% for teacher in teacher %}              
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">First name:</label>
+                        <input type="text" name="first_name" value="{{teacher.first_name}}" id="id_first_name" maxlength="250" required="" class="form-control" disabled="">
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_last_name" class="control-label">Last name:</label>
+                    <input type="text" name="last_name"  maxlength="250" value="{{teacher.last_name}}" id="id_last_name"  class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label for="id_gender" class="control-label">Gender:</label>
+                    <input type="text" name="gender"  maxlength="250" value="{{teacher.gender}}" id="id_gender"  class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Email:</label>
+                        <input type="text"  value="{{teacher.email}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Nationality:</label>
+                    <input type="text"  value="{{teacher.nationality}}"   class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Education:</label>
+                    <input type="text"  value="{{teacher.education}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+               
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Temporary Address:</label>
+                    <input type="text" placeholder="pradesh,Jilla,Nagarpalika/Gaupalika,Ward-no"  value="{{teacher.temporary_address}}"   class="form-control" disabled >
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <div class="form-group label-floating">
+                    <label  class="control-label">Permanent Address:</label>
+                        <input type="text" placeholder="pradesh,Jilla,Nagarpalika/Gaupalika,Ward-no"  value="{{teacher.permanent_address}}" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group label-floating">
+                  <label  class="control-label">Phone:</label>
+                    <input type="text"  value="{{teacher.phone}}"   class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+                <a href="{% url 'authentication:teacher_update' teacher.slug %}"><button type="submit" class="btn btn-primary pull-right">Update Profile</button></a>
+            <div class="clearfix"></div>
+            {% endfor %}
+            
+            </div>
+        </div>
+    </div>
+
+</body>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+            
+	                	         
+	                 

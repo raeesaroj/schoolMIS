@@ -1,0 +1,97 @@
+.homepage-main {
+  overflow: hidden;
+}
+
+.notice-board {
+  background-color: rgba(20,20,20,0.6);
+  color: #fff;
+  width: 200px;
+  display: block;
+  z-index: 9;
+  right: 0;
+  padding: 15px;
+  position: fixed;
+  top: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .notice-board {
+    padding: 2px;
+    width: 175px;
+  }
+
+  .notice-board > a {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  .notice-board > h4 {
+    margin-bottom: 0;
+  }
+}
+
+.notice-board > a {
+  color: #fff;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.notice-board > h4 {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.swalbtn-p {
+  width: 100%;
+  font-size: 18px;
+  color: #111;
+}
+
+.swal-btn {
+  border: 2px solid #00bcd4;
+  background-color: #fff;
+  color: #111;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14);
+  padding: 12px 20px;
+  line-height: 1.428571;
+  text-transform: uppercase;
+  transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1);
+  will-change: box-shadow, transform;
+}
+
+.swal-btn:hover, .swal-btn:active, .swal-btn:focus {
+  color: #fff !important;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .14), 0 7px 12px -5px rgba(0, 188, 212, .46);
+}
+
+.swal2-popup .swal2-image {
+  margin: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .swal2-show {
+    width: 90% !important;
+  }
+}
+
+.swal2-popup .swal2-title {
+  color: #4caf50;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+  font-weight: 400;
+  width: 54%;
+}
+
+.swal2-popup .swal2-header {
+  flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+  .swal2-popup .swal2-header {
+    flex-direction: column;
+  }
+}

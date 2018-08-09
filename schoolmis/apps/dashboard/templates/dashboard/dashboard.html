@@ -1,0 +1,195 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+{% include 'dashboard/sidebar.html' %}
+{% include 'dashboard/navbar.html' %}
+                  <div class="alert alert-info" style="width: 300px;display: table; margin:0 auto;float: right; background:#00bcd4; " id="message">
+    {% if request.user|has_group:"Student" %}
+                            <p>You are login as Student</p>
+                        {% elif request.user|has_group:"Teacher" %}
+                            <p>You are login as Teacher <br>
+                            Class Teacher of
+                                {% with request.user.teacher_profile.class_teacher.all as class_teacher %}
+                                    {% for g in class_teacher %}
+                                     Grade {{g.grade}}, Section {{g.name}}
+                                    {% endfor %}
+                                {% endwith %}
+                            </p>
+                        {% elif request.user|has_group:"Guardian" %}
+                            <p>You are login as Guardian</p>
+                        {% elif request.user|has_group:"Principal" %}
+                            <p>You are login as Principal</p>
+                        {% elif request.user|has_group:"Admin Assistant" %}
+                            <p>You are login as Admin Assistant</p>
+                            <p class="navbar-brand" >Welcome {{request.user}}</p>
+                        {% else %}
+                            <p>You are login as Super Admin</p>
+
+                        {% endif %}
+</div>
+        
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script>
+        //When the page has loaded.
+        $(document).ready(function(){
+
+        $('#message').fadeIn(3000).delay(3000).fadeOut(2000);
+
+});
+        </script>
+            <div class="content">
+            <div class="tab-content">
+                {% if request.user|has_group:"Teacher" or request.user|has_group:"Student" or request.user|has_group:"Guardian" %}
+            <div class="active tab-pane" id="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% if request.user|has_group:"Teacher" or request.user|has_group:"Student" %}
+                         <div class="col-md-6">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                               
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <div class="card card-plain">
+                                    <div class="card-header" data-background-color="purple">
+                                         {% if request.user|has_group:"Student" %}<h4 class="title">Subjects</h4> {% endif %}
+                                         {% if request.user|has_group:"Teacher" %}
+                                        <h4 class="title">Subject Handled</h4>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Subject Code</th>
+                                                <th>Grade</th>
+                                            </thead>
+                                            {% if request.user|has_group:"Student" %}
+                                            {% with request|student_subjects as subjects %}
+                                            {% if subjects %}
+                                            {% for subject in subjects %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{subject.name}}</td>
+                                                <td>{{subject.code}}</td>                    
+                                                <td>{{subject.grade}}</td>           
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                            {% endif %}
+                                            </tr>
+                                            {% if request.user|has_group:"Teacher" %}
+                                             {% with request|teacher_subjects as subjects %}
+                                              {% if subjects %}
+                                              {% for subject in subjects %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{subject.name}}</td>
+                                                <td>{{subject.code}}</td>                    
+                                                <td>{{subject.grade}}</td>
+                                                {% endfor %}
+                                                 {% endif %}
+                                                 {% endwith %}
+                                                 {% endif %}
+                                              </tbody>
+                                                  </table>
+                                        </div>
+                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                    {% endif %}
+
+<!--         <div class="col-sm-6">
+            {% if request.user|has_group:"Guardian" or request.user|has_group:"Student"  %}
+        <div class="panel panel-white border-left-xlg  border-left-danger-600">
+                    <div class="panel-heading">
+                        <h7 class="panel-title">
+                            <a href="#collapsible-control-groupclass" data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                {% if request.user|has_group:"Student" %} Class Teacher{% endif %}
+
+                                {% if request.user|has_group:"Guardian" %} Children {% endif %}
+
+
+
+                                </a>
+                        </h7>
+                        <div class="panel-collapse collapse" id="collapsible-control-groupclass" aria-expanded="false" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="media-body">
+                                    <span class="media-heading text-semibold">
+                                        {% if request.user|has_group:"Student" %}
+                                            {{request.user.student_profile.section.class_teacher}}
+                                        {% endif %}
+
+                                         {% if request.user|has_group:"Guardian" %}
+                                                {% with request|parent_children as children %}
+                                                    {% if children %}
+                                                        {% for child in children %}
+                                                           {{ forloop.counter }}.
+                                                            <a href="{% url 'authentication:student_detail' child.slug %}">
+                                                               <span style="color:#000;">{{child.get_full_name}}</span> </a><br>
+
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %}
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                                        {% endif %}
+
+                    </div> -->
+                </div>
+                    <!-- <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                               
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {% include 'reportcard/marksheet_list.html' %}
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=vjkuflvravaui8vn05kn031rvc%40group.calendar.google.com&amp;color=%2328754E&amp;ctz=Asia%2FKatmandu" style="border-width:0" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+                        </div> 
+                    </div> -->
+                </div>
+                </div>
+                {% endif %}
+
+                {% include 'dashboard/users.html'%}
+                {% include 'dashboard/grade.html'%}
+                {% include 'dashboard/reportcard.html'%}
+                {% include 'dashboard/usercreate.html'%}
+                {% include 'dashboard/attendance.html'%}
+                {% include 'dashboard/notes.html'%}
+                {% include 'dashboard/events.html'%}
+
+            </div>
+            </div>
+            </body>
+<!--   Core JS Files   -->
+{% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>

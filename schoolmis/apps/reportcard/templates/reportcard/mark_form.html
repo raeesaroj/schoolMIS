@@ -1,0 +1,166 @@
+{% load staticfiles %}
+{% load filter_groups %}
+{% include 'dashboard/base.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+ <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'assets/img/sidebar-1.jpg' %}">
+            <div class="logo">
+                    GRS 
+                </a>
+                <span class="label bg-info">Academic Year: ( 2018 - 2019 )</span>
+            </div>
+            <div class="sidebar-wrapper">
+                {% include 'dashboard/sidebar/marksheet_sidebar.html' %}
+            </div>
+        </div>{% include 'dashboard/navbar.html' %}
+        <div class="content">    
+
+ <div class="active tab-pane" id="reportcard">
+     <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">Reportcard</h4>
+                                </div>
+                                <div class="card-content">
+                                    {% include 'form_error.html' %}
+                               <form action="" method="post" id ="mark_form" data-form-url="{% url 'note_assignment:ajax_load_students_subjects_formset' %}"
+                                    enctype='multipart/form-data'>
+                                {% csrf_token %}
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_grade" class="control-label">Grade:</label>
+                                            {{form.grade }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_subject" class="control-label">Subject:</label>
+                                            {{form.subject}}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_exam_type" class="control-label">Exam Type:</label>
+                                            {{form.exam_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_full_marks" class="control-label">Full Marks:</label>
+                                            {{form.full_marks}}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                            <label for="id_pass_marks" class="control-label">Pass Marks:</label>
+                                            {{form.pass_marks}}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>  
+                             <div id="student_marks">
+                {{ student_marks.management_form }}
+
+          <table class="table">
+            <h3>Add student Marks</h3>
+
+            {% for form in student_marks.forms %}
+                {% if forloop.first %}
+                    <thead>
+                    <tr>
+                        {% for field in form.visible_fields %}
+                            <th>{{ field.label|capfirst }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tr class="{% cycle 'row1' 'row2' %} student_marks_formset_row ">
+                    {% for field in form.visible_fields %}
+                        <td>
+                            {# Include the hidden fields in the form #}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </table>
+
+          </div>
+                    <input type="submit" class="btn btn-primary">
+                    </form>
+                    </div> 
+                     </div>
+                    </div>
+                    </div> 
+                    </div>
+                </div>
+            </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_grade").change(function () {
+      var url = $("#mark_form").attr("data-form-url");
+      var grade = $(this).val();
+      $.ajax({
+        url: url,
+        data: {
+          'grade': grade
+        },
+        success: function (data) {
+        $("#student_marks").html(data.students);
+        $("#id_subject").html(data.subjects);
+        }
+
+      });
+
+    });
+  </script>
+
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $('.student_marks_formset_row').formset({
+        addText: 'Add student marks',
+        deleteText: 'Delete',
+        prefix: 'studentmarks_mark'
+    });
+</script>
+
+  {% include 'dashboard/dashboardjs.html' %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js' %}
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</html>

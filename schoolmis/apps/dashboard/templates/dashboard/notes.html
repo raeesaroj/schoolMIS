@@ -1,0 +1,48 @@
+{% load filter_groups %}
+ </style>
+ <div class="tab-pane" id="notes">
+  <div class="row">
+    {% if perms.notes.add_assignment %}
+        <div class="col-xs-2">
+                <a href="{% url 'note_assignment:assignment_create' %}"><button class="btn btn-info">Add Assignment</button></a>
+            </div>
+            {% endif %}
+               <!--  {% if perms.notes.view_assignment %}
+                <div class="col-xs-3">
+                <a href="{% url 'note_assignment:assignment_list' %}"><button class="btn btn-info">View Assignment</button></a>
+            </div>
+            {% endif %} -->
+            {% if perms.notes.add_note %}    
+            <div class="col-xs-6">
+                <a href="{% url 'note_assignment:note_create' %}"><button class="btn btn-info pull-right">Add Notes</button></a>
+            </div>
+            {% endif %}
+        </div>
+
+                  <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                               
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                {% include 'notes/assignment_list.html' %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel border-left-xlg border-left-info invoice-grid timeline-content">
+                                
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                {% include 'notes/note_list.html' %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+</div>

@@ -1,0 +1,27 @@
+.contact-main {
+  padding-top: 100px;
+}
+
+.contact-bg {
+  background: linear-gradient(
+                     rgba(20,20,20, .5),
+                     rgba(20,20,20, .5)),
+                     url('../../assets/contact.jpg') no-repeat 100% 0% fixed;
+  background-size: cover;
+  height: 60vh;
+}
+
+@media screen and (max-width: 992px) {
+  .contact-bg {
+    background-attachment: scroll;
+  }
+}
+
+.contact-head {
+  position: relative;
+  color: #fff;
+  font-size: 35px;
+  text-align: center;
+  top: 40%;
+  font-family: 'Amaranth', 'Roboto', sans-serif;
+}

@@ -1,0 +1,11 @@
+Django==1.11
+pytz==2018.3
+django-countries==5.1.1
+pillow==5.0.0
+requests==2.18.4
+djangorestframework==3.7.7
+django-autocomplete-light==3.2.10
+django-webpack-loader==0.6.0
+django-mathfilters==0.4.0
+WeasyPrint==0.42.2
+django-import-export==1.0.0

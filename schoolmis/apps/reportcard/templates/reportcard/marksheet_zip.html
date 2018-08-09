@@ -1,0 +1,63 @@
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marsheet- {{marksheet.student.user}}</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'/>
+</head>
+<body>
+<div>
+        <div style="text-align: center; margin-top: 20px">
+         <form action="{% url 'reportcard:marksheet_pdf' marksheet.pk %}" method="post">{% csrf_token %}
+         <input type="submit" value="Export as PDF" style="text-align: center">
+         </form>
+        </div>
+    <center>
+        <div>
+            Student Name: {{marksheet.student.user}}<br>
+            Grade: {{marksheet.grade.name }}<br>
+            Section: {{marksheet.student.section.name }}<br>
+        </div>
+    </center>
+<div class="table-responsive">
+<table class="table table-sm table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2">#</th>
+      <th scope="col" rowspan="2">Subject</th>
+      <th scope="col" rowspan="2">Full</th>
+      <th scope="col" rowspan="2">Pass</th>
+      <th scope="col" colspan="2"><center>Obtained Marks</center></th>
+      <th scope="col" rowspan="2">Total</th>
+      <th scope="col" rowspan="2">Remarks</th>
+    </tr>
+    <tr>
+      <th scope="col">TH</th>
+      <th scope="col">PR</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for marksheet in marksheet.student.marks_student.all %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{marksheet.mark.subject.name }}</td>
+      <td>{{marksheet.mark.full_marks}}</td>
+      <td>{{marksheet.mark.pass_marks}}</td>
+      <td>{{marksheet.marks_obtained}}</td>
+      <td>20</td>
+      <td>Total: </td>
+      <td>Pass</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+    <b>Issue by</b> :{{marksheet.issue_by}}<br>
+    <b>Total marks obtained </b>: {{marksheet.get_total_obtained_marks}}
+
+</div>
+</div>
+</body>
+
+</html>

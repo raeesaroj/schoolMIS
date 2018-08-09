@@ -1,0 +1,42 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Note List</h4>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+            	{% if note %}
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% endif %}
+				{% for note in note %}
+                <tr>
+                	<td>{{ forloop.counter }}</td>
+	                <td><a href="{% url 'note_assignment:note_detail' note.pk %}" class="marksheet">{{note.title}}</a></td>
+	                <td>{{note.subject}}</td>
+	                <td>{{note.grade}}</td>
+	                {% if perms.notes.change_note %}
+
+	                <td><a href="{% url 'note_assignment:note_update' note.pk %}" class="marksheets"><i class="fa fa-edit " aria-hidden="true"></i></a>
+					</td>
+	                <td><a href="{% url 'note_assignment:note_delete' note.pk %}" class="marksheets"><i class="fa fa-trash-o " aria-hidden="true"></i></a></td>
+					{% endif %}
+
+					{% empty %}
+					Sorry, no Note
+                {% endfor %}
+            	</tr>
+            	  </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+
+
+

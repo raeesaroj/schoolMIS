@@ -1,0 +1,12 @@
+
+
+{% for mark in mark %}
+    <a href="{% url 'reportcard:mark_detail' mark.pk %}">{{mark}}</a>
+    	 {% if perms.reportcard.change_mark %}
+    <a href="{% url 'reportcard:mark_update' mark.pk %}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                <a href="{% url 'reportcard:mark_delete' mark.pk %}"><i class="fa fa-trash-o " aria-hidden="true"></i></a> <br>
+                {% endif %}
+{% empty %}
+    Sorry, no Mark found
+{% endfor %}
+     
